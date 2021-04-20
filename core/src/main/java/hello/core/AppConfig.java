@@ -9,6 +9,8 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * AppConfig
@@ -16,20 +18,25 @@ import hello.core.order.OrderServiceImpl;
  * 구현 객체를 생성하고, 연결하는 책임을 가지는 설정 클래스
  * 구성 정보에서 역할과 구현을 명확하게 분리해야 함
  */
+@Configuration
 public class AppConfig {
 
+    @Bean  //스프링 빈(스프링 컨테이너에 등록된 객체)
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    @Bean
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public DiscountPolicy discountPolicy() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
