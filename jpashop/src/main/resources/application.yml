@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create   # 실행시점에 table drop 하고 create
     properties:
       hibernate:
 #        show_sql: true
