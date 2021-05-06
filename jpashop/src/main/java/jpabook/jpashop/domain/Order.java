@@ -25,7 +25,6 @@ public class Order {
 
     //(fetch = FetchType.EAGER)
     //JPQL select o from order o; -> SQL select * from order n + 1(order)
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -38,7 +37,6 @@ public class Order {
     cascade 적용시
     persist(order)
     */
-
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;  //배송정보
