@@ -18,7 +18,8 @@ import static org.junit.Assert.*;
 @Transactional
 public class MemberServiceTest {
 
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberRepository memberRepository;
     @Autowired MemberService memberService;
     @Autowired EntityManager em;
 
@@ -33,7 +34,7 @@ public class MemberServiceTest {
 
         //then
         em.flush();
-        assertEquals(member, memberRepository.findOne(saveId));
+        assertEquals(member, memberRepository.findById(saveId).get());
     }
 
     @Test(expected = IllegalStateException.class)
