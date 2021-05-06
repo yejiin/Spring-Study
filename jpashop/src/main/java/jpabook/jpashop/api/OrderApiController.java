@@ -6,6 +6,7 @@ import jpabook.jpashop.repository.order.query.OrderFlatDto;
 import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryRepository;
+import jpabook.jpashop.service.query.OrderQueryService;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -71,6 +72,14 @@ public class OrderApiController {
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    private final OrderQueryService orderQueryService;
+
+    @GetMapping("/api/v3.OSIV/orders")
+    public List<jpabook.jpashop.service.query.OrderDto> ordersV3_OSIV() {
+
+        return orderQueryService.ordersV3();
     }
 
     /**
