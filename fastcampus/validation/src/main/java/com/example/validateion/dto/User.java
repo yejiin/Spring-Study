@@ -1,5 +1,8 @@
 package com.example.validateion.dto;
 
+import com.example.validateion.annotation.YearMonth;
+
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -18,7 +21,7 @@ public class User {
     @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message = "핸드폰 번호의 양식와 맞지 않습니다. 01x-xxx(x)-xxxx")
     private String phoneNumber;
 
-    @Size(min = 6, max = 6)
+    @YearMonth
     private String reqYearMonth;  // yyyyMM
 
     public String getName() {
@@ -53,8 +56,16 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    @AssertTrue
-    public boolean reqYearMonthValidation() {
+    public String getReqYearMonth() {
+        return reqYearMonth;
+    }
+
+    public void setReqYearMonth(String reqYearMonth) {
+        this.reqYearMonth = reqYearMonth;
+    }
+
+    @AssertTrue(message = "yyyyMM 의 형식에 맞지 않습니다.")
+    public boolean isReqYearMonthValidation() {
         this.reqYearMonth = getReqYearMonth() + "01";
 
         try {
