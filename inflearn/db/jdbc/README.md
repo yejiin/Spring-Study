@@ -1,4 +1,16 @@
-# 1. JDBC 이해
+### 목차
+1. [JDBC 이해](#jdbc-이해)
+2. [커넥션풀과 데이터소스 이해](#커넥션풀과-데이터소스-이해)
+3. [트랜잭션 이해](#트랜잭션-이해)
+4. [스프링과 문제 해결 - 트랜잭션](#스프링과-문제-해결---트랜잭션)
+5. [자바 예외 이해](#자바-예외-이해)
+6. [스프링과 문제 해결 - 예외 처리, 반복](#스프링과-문제-해결---예외-처리와-반복)
+
+<br>
+<br>
+
+
+# JDBC 이해
 
 **JDBC** : 자바에서 데이터베이스에 접속할 수 있도록 하는 자바 API
 
@@ -26,24 +38,23 @@
 ### ORM
 
 - 객체를 관계형 데이터베이스 테이블과 매핑해주는 기술이다.
-
 - ORM 기술이 개발자 대신에 SQL을 동적으로 만들어 실행해준다.
-
 - JPA는 자바 진영의 ORM 표준 인터페이스이고, 이것을 구현한 것으로 하이버네이트와 이클립스 링크 등의 구현 기술이 있다.
-
 - Ex) JPA, 하이버네이트, 이클립스 링크
-
   
 
 ## DriverManager `V0`
 - DB 드라이버들을 관리하고, 커넥션을 획득하는 기능 제공
 - JDBC 라이브러리
+
 ### DriverManager 커넥션 요청 흐름
 ![DriverManager](https://user-images.githubusercontent.com/63090006/172969463-1b064329-e5be-4337-9553-c252321c95a7.jpeg)
 
 <br>
 
-# 2. 커넥션풀과 데이터소스 이해
+
+
+# 커넥션풀과 데이터소스 이해
 
 ## 커넥션풀
 
@@ -61,7 +72,7 @@
 
 
 
-# 3. 트랜잭션 이해
+# 트랜잭션 이해
 
 **Transaction** : 업무 처리의 최소 단위
 
@@ -90,7 +101,7 @@
 
 
 
-# 4. 스프링과 문제 해결 - 트랜잭션
+# 스프링과 문제 해결 - 트랜잭션
 
 ## 애플리케이션 구조
 
@@ -162,11 +173,11 @@
 
 
 
-# 5. 자바 예외 이해
+# 자바 예외 이해
 
 ## 예외 계층
 
-![]()
+<img width="472" alt="image" src="https://user-images.githubusercontent.com/63090006/173957860-2e61bd4b-bb86-4ee4-a428-2418ab84cd2b.png">
 
 - `Throwable` : 최상위 예외
 - `Error` : 메모리 부족이나 심각한 시스템 오류와 같이 **애플리케이션에서 복구 불가능한 시스템 예외**
@@ -220,8 +231,22 @@
 
 
 
-# 6. 스프링과 문제 해결 - 예외 처리, 반봅
+# 스프링과 문제 해결 - 예외 처리와 반복
 
 ## 스프링 데이터 접근 예외 계층
+<img width="515" alt="image" src="https://user-images.githubusercontent.com/63090006/173957690-56a87f5a-c22e-4957-8113-7b707b28077a.png">
 
-![]()
+- Transient : 일시적  
+  - Ex) 쿼리 타임아웃, 락  
+- NoTransient : 일시적이지 않음  
+  - Ex) SQL 문법 오류, 데이터베이스 제약조건 위배
+
+
+### 예외 처리 -> 스프링 예외 변환기 `SQLExceptionTranslator`
+```java
+  SQLExceptionTranslator exTranslator = new
+  SQLErrorCodeSQLExceptionTranslator(dataSource);
+  DataAccessException resultEx = exTranslator.translate("select", sql, e);
+```
+
+### JDBC 반복 -> JdbcTemplate
