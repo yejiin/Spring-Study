@@ -50,6 +50,9 @@
 - 순수한 JPA를 사용하면 `EntityManager` 는 `PersistenceException` 과 그 하위 예외 발생
 - `@Repository` 가 붙은 클래스는 스프링 예외 변환을 처리하는 AOP의 적용 대상이 되어 스프링 데이터 접근 예외로 변환 (`스프링 예외 추상화`)
 
+![](https://user-images.githubusercontent.com/63090006/179649482-5ce49fe6-6066-4005-a228-325ce2fbb058.png)
+
+![](https://user-images.githubusercontent.com/63090006/179649457-d63cebde-1aee-4f55-8735-23b829b189a3.png)
 
 
 <br>
@@ -64,7 +67,6 @@
   - 스프링 데이터 JPA가 구현 클래스를 대신 생성
 - 쿼리 메서드 기능
   - 메서드 이름을 분석해서 쿼리를 자동으로 생성 및 실행
-
 
 
 <br>
