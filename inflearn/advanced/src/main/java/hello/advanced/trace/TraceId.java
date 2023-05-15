@@ -29,7 +29,7 @@ public class TraceId {
         return new TraceId(id, level - 1);
     }
 
-    public boolean isFirst() {
+    public boolean isFirstLevel() {
         return level == 0;
     }
 
